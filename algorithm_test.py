@@ -18,7 +18,7 @@ def test_mod_power_of_two():
   assert modulo(0,  8)  == 0
   assert modulo(10, 4)  == 2
 
-def check_if_power_of_two():
+def test_is_2_power():
   assert is_2_power(0) == False
   assert is_2_power(1) == True
   assert is_2_power(2) == True
@@ -39,3 +39,14 @@ def test_overlapping_rectangle():
   assert overlapping_rectangle(rectangle_3, rectangle_1) == Rectangle(2,2,2,1)
   assert overlapping_rectangle(rectangle_4, rectangle_2) == Rectangle(4,4,1,2)
   assert overlapping_rectangle(rectangle_5, rectangle_6) == Rectangle(-1,-1,1,1)
+
+def test_is_rectangle():
+  Point = namedtuple('Point', ('x', 'y'))
+  point_1 = Point(0,0)
+  point_3 = Point(3,1)
+  point_2 = Point(-2,6)
+  point_4 = Point(1,7)
+  point_5 = Point(1,8)
+
+  assert is_rectangle(point_1, point_2, point_3, point_4) == True
+  assert is_rectangle(point_1, point_2, point_3, point_5) == False
