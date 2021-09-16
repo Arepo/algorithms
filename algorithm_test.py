@@ -1,7 +1,9 @@
 from .propagate_rightmost_set_bit import propagate_rightmost_set_bit as pr
 from .mod_power_of_two import modulo
 from .check_if_power_of_two import is_2_power
+from .rectangle_overlap import overlapping_rectangle
 from collections import namedtuple
+import pdb
 
 # All in O(1) time, using bitwise operators, rquality checks, and Boolean operators
 
@@ -29,7 +31,11 @@ def test_overlapping_rectangle():
   rectangle_2 = Rectangle(4,3,2,3)
   rectangle_3 = Rectangle(2,2,3,5)
   rectangle_4 = Rectangle(2,4,3,3)
+  rectangle_5 = Rectangle(-2,-2,3,3)
+  rectangle_6 = Rectangle(-1,-1,1,1)
+
   assert overlapping_rectangle(rectangle_1, rectangle_2) == None
   assert overlapping_rectangle(rectangle_1, rectangle_3) == Rectangle(2,2,2,1)
   assert overlapping_rectangle(rectangle_3, rectangle_1) == Rectangle(2,2,2,1)
-  assert overlapping_rectangle(rectangle_4, rectangle_2) == Rectangle(4,4,2,1)
+  assert overlapping_rectangle(rectangle_4, rectangle_2) == Rectangle(4,4,1,2)
+  assert overlapping_rectangle(rectangle_5, rectangle_6) == Rectangle(-1,-1,1,1)
