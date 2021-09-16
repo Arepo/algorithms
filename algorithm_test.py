@@ -1,7 +1,7 @@
 from .propagate_rightmost_set_bit import propagate_rightmost_set_bit as pr
 from .mod_power_of_two import modulo
 from .check_if_power_of_two import is_2_power
-from .rectangle_overlap import overlapping_rectangle
+from .rectangle_functions import overlapping_rectangle, is_rectangle
 from collections import namedtuple
 import pdb
 
@@ -26,6 +26,7 @@ def test_is_2_power():
   assert is_2_power(16) == True
 
 def test_overlapping_rectangle():
+  # Do two x-/y-axis aligned rectangles overlap? If so, return the rectangle they create
   Rectangle = namedtuple('Rect', ('x', 'y', 'width', 'height'))
   rectangle_1 = Rectangle(0,0,4,3)
   rectangle_2 = Rectangle(4,3,2,3)
