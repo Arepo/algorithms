@@ -2,6 +2,7 @@ from .propagate_rightmost_set_bit import propagate_rightmost_set_bit as pr
 from .mod_power_of_two import modulo
 from .check_if_power_of_two import is_2_power
 from .rectangle_functions import overlapping_rectangle, is_rectangle
+from .remove_key import remove_key
 from collections import namedtuple
 import pdb
 
@@ -52,8 +53,10 @@ def test_is_rectangle():
   assert is_rectangle(point_1, point_2, point_3, point_4) == True
   assert is_rectangle(point_1, point_2, point_3, point_5) == False
 
-def test_delete_dups_from_array():
-  # Assumes array is sorted, and return number of 'valid' eles (can contain trailing invalid ones)
-  arr = [2,3,5,5,7,11,11,11,13]
-  assert uniquify(arr) == 6
-  assert arr[:6] == [2,3,5,7,11,13]
+def test_remove_key():
+  # Modify array and return number of elements remaining in O(n) time and O(1) space, left-shifting valid values and leaving invalid ones afterwards
+  arr = [13, 11, 11, 11, 5, 2, 5, 7, 3, 5, 5]
+  assert remove_key(arr, 11) == 8
+  assert arr[:8] == [13, 5, 2, 5, 7, 3, 5, 5]
+  assert remove_key(arr, 5) == 4
+  assert arr[:4] == [13, 2, 7, 3]
