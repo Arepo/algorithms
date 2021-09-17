@@ -51,3 +51,9 @@ def test_is_rectangle():
 
   assert is_rectangle(point_1, point_2, point_3, point_4) == True
   assert is_rectangle(point_1, point_2, point_3, point_5) == False
+
+def test_delete_dups_from_array():
+  # Assumes array is sorted, and return number of 'valid' eles (can contain trailing invalid ones)
+  arr = [2,3,5,5,7,11,11,11,13]
+  assert uniquify(arr) == 6
+  assert arr[:6] == [2,3,5,7,11,13]
