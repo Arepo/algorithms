@@ -6,7 +6,7 @@ def primes_to_n(number):
     return []
 
   primes = [2]
-  for candidate in range(3, number, 2):
+  for candidate in range(3, number + 1, 2):
     root = math.sqrt(candidate)
     root_index = bisect.bisect(primes, root)
 
