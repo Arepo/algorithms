@@ -3,6 +3,7 @@ from .mod_power_of_two import modulo
 from .check_if_power_of_two import is_2_power
 from .rectangle_functions import overlapping_rectangle, is_rectangle
 from .remove_key import remove_key
+from .primes import primes_to_n
 from collections import namedtuple
 import pdb
 
@@ -83,4 +84,7 @@ def test_remove_key():
   assert remove_key(arr, 11) == 8
   assert arr[:8] == [13, 5, 2, 5, 3, 'a', 5, 5]
 
-
+def test_primes_to_n():
+  primes = primes_to_n(1000)
+  assert all(prime in primes for prime in [2, 109, 523, 997])
+  assert all(nonprime not in primes for nonprime in [1, 4, 555, 1000])
