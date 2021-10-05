@@ -5,6 +5,7 @@ from .rectangle_functions import overlapping_rectangle, is_rectangle
 from .remove_key import remove_key
 from .primes import primes_to_n
 from .palindrome import is_palindrome_permutation
+from .is_one_away import is_one_away
 from collections import namedtuple
 import pdb
 
@@ -95,3 +96,11 @@ def test_is_permutation_of_palindrome():
   non_palindromic = 'aa bbb ccc'
   assert is_palindrome_permutation(palindromic) == True
   assert is_palindrome_permutation(non_palindromic) == False
+
+def test_is_one_away():
+  # return true if StringA requires 1 or 0 edits to match StringB
+  assert is_one_away('pale', 'ple') == True
+  assert is_one_away('pales', 'pale') == True
+  assert is_one_away('pale', 'bale') == True
+  assert is_one_away('pale', 'bake') == False
+
