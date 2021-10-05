@@ -4,6 +4,7 @@ from .check_if_power_of_two import is_2_power
 from .rectangle_functions import overlapping_rectangle, is_rectangle
 from .remove_key import remove_key
 from .primes import primes_to_n
+from .palindrome import is_palindrome_permutation
 from collections import namedtuple
 import pdb
 
@@ -88,3 +89,10 @@ def test_primes_to_n():
   primes = primes_to_n(1000)
   assert all(prime in primes for prime in [2, 109, 523, 997])
   assert all(nonprime not in primes for nonprime in [1, 4, 555, 1000])
+
+def test_is_permutation_of_palindrome():
+  palindromic = 'aa bb ccc'
+  non_palindromic = 'aa bbb ccc'
+  assert is_palindrome_permutation(palindromic) == True
+  assert is_palindrome_permutation(non_palindromic) == False
+
