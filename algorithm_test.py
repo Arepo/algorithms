@@ -95,4 +95,3 @@ def test_is_permutation_of_palindrome():
   non_palindromic = 'aa bbb ccc'
   assert is_palindrome_permutation(palindromic) == True
   assert is_palindrome_permutation(non_palindromic) == False
-
