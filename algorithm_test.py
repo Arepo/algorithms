@@ -9,13 +9,13 @@ from .is_one_away import is_one_away
 from collections import namedtuple
 import pdb
 
-# All in O(1) time, using bitwise operators, rquality checks, and Boolean operators
-
 def test_propagate_rightmost_set_bit():
+  # In O(1) time, using bitwise operators, equality checks, and Boolean operators
   bit_word = int('01010000', 2)
   assert bin(pr(bit_word)) == '0b1011111'
 
 def test_mod_power_of_two():
+  # In O(1) time, using bitwise operators, equality checks, and Boolean operators
   # Assuming inputs are whole numbers
   assert modulo(77, 64) == 13
   assert modulo(13, 16) == 13
@@ -23,6 +23,7 @@ def test_mod_power_of_two():
   assert modulo(10, 4)  == 2
 
 def test_is_2_power():
+  # In O(1) time, using bitwise operators, equality checks, and Boolean operators
   assert is_2_power(0) == False
   assert is_2_power(1) == True
   assert is_2_power(2) == True
