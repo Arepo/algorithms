@@ -6,6 +6,7 @@ from .remove_key import remove_key
 from .primes import primes_to_n
 from .palindrome import is_palindrome_permutation
 from .is_one_away import is_one_away
+from .matrix_rotation import rotate
 from collections import namedtuple
 import pdb
 
@@ -104,4 +105,25 @@ def test_is_one_away():
   assert is_one_away('pales', 'pale') == True
   assert is_one_away('pale', 'bale') == True
   assert is_one_away('pale', 'bake') == False
+
+def test_matrix_rotation():
+  # In place rotation
+  odd_matrix = [[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]]
+  rotate(odd_matrix)
+  assert odd_matrix == [[7, 4, 1],
+                        [8, 5, 2],
+                        [9, 6, 3]]
+
+  even_matrix =[['a', 'b', 'c', 'd'],
+                ['e', 'f', 'g', 'h'],
+                ['i', 'j', 'k', 'l'],
+                ['m', 'n', 'o', 'p']]
+  rotate(even_matrix)
+  assert even_matrix  == [['m', 'i', 'e', 'a'],
+                          ['n', 'j', 'f', 'b'],
+                          ['o', 'k', 'g', 'c'],
+                          ['p', 'l', 'h', 'd']]
+
 
