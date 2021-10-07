@@ -136,4 +136,14 @@ def test_kth_from_end():
   assert sll.kth_from_end(1).data == 9
   assert sll.kth_from_end(7).data == 3
 
+def test_is_palindrome():
+  non_palindrome = SinglyLinkedList()
+  for char in 'abracadabra':
+    sll.append(Node(char))
 
+  palindrome = SinglyLinkedList()
+  for char in 'racecar':
+    sll.append(Node(char))
+
+  assert non_palindrome.is_palindrome() == False
+  assert palindrome.is_palindrome() == True
