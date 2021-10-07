@@ -7,7 +7,7 @@ from .primes import primes_to_n
 from .palindrome import is_palindrome_permutation
 from .is_one_away import is_one_away
 from .matrix_rotation import rotate
-from .rotation_check import is_rotation
+from .linked_list import Node, SinglyLinkedList
 from collections import namedtuple
 import pdb
 
@@ -127,9 +127,12 @@ def test_matrix_rotation():
                           ['o', 'k', 'g', 'c'],
                           ['p', 'l', 'h', 'd']]
 
-def test_rotation_check():
-  assert is_rotation('waterbottle', 'erbottlewat') == True
-  assert is_rotation('waterbottlewater', 'erwaterbottlewat') == True
-  assert is_rotation('waterbottlewaterw', 'erwaterbottlewat') == False
+def test_kth_from_end():
+  sll = SinglyLinkedList()
+  for i in range(0, 10):
+    sll.append(Node(i))
+  assert sll.kth_from_end(1).data == 9
+  assert sll.kth_from_end(7).data == 3
+
 
 
