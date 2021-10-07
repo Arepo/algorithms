@@ -1,3 +1,5 @@
+import pdb
+
 class Node:
   def __init__(self, data):
     self.data = data
@@ -8,6 +10,24 @@ class Node:
 
   def __repr__(self):
     return "Node <{}>".format(self.data)
+
+  def kth_from_end(self, k):
+    if not self.next and k == 1:
+      return self
+    elif not self.next:
+      return 1
+
+    nth_or_target = self.next.kth_from_end(k)
+    if isinstance(nth_or_target, Node):
+      # Just pass the node up once we've found it
+      return nth_or_target
+
+    nth_of_this = nth_or_target + 1
+    if nth_of_this == k:
+      # We found our boy
+      return self
+
+    return nth_of_this
 
 class SinglyLinkedList:
   def __init__(self):
@@ -47,6 +67,9 @@ class SinglyLinkedList:
     while current:
       print(current)
       current = current.next
+
+  def kth_from_end(self, k):
+    return self.head.kth_from_end(k)
 
   class NodeNotInListError(Exception):
     def __init__(self, data):
