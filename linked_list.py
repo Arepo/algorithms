@@ -29,6 +29,24 @@ class Node:
 
     return nth_of_this
 
+  def is_palindromic_from_position(self, position, length):
+    if position - 0.5 == length/2:
+      # We're at the middle node
+      return self.next
+
+    if position > length/2:
+      # We've just gone past the middle node
+      return self
+
+    node_or_false = self.next.is_palindromic_from_position(position + 1, length)
+
+    if node_or_false and node_or_false.data == self.data:
+      # If a sublist is false the whole stays false, else we compare to the next node
+      return node_or_false.next or True
+
+    return False
+
+
 class SinglyLinkedList:
   def __init__(self):
     self.head = None
@@ -70,6 +88,10 @@ class SinglyLinkedList:
 
   def kth_from_end(self, k):
     return self.head.kth_from_end(k)
+
+  def is_palindrome(self, length):
+    # pdb.set_trace()
+    return self.head.is_palindromic_from_position(1, length)
 
   class NodeNotInListError(Exception):
     def __init__(self, data):
