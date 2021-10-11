@@ -95,8 +95,7 @@ def test_primes_to_n():
   assert all(nonprime not in primes for nonprime in [1, 4, 555, 1000])
 
 def test_is_permutation_of_palindrome():
-  palindromic = 'aa bb ccc'
-  non_palindromic = 'aa bbb ccc'
+  palindromic, non_palindromic = 'aa bb ccc', 'aa bbb ccc'
   assert is_palindrome_permutation(palindromic) == True
   assert is_palindrome_permutation(non_palindromic) == False
 
@@ -129,6 +128,7 @@ def test_matrix_rotation():
 
 # Linked list algorithms
 
+
 def test_kth_from_end():
   sll = SinglyLinkedList()
   for i in range(0, 10):
@@ -139,18 +139,35 @@ def test_kth_from_end():
 def test_is_palindrome():
   # Given list length
   non_palindrome = SinglyLinkedList()
+  odd_palindrome = SinglyLinkedList()
+  even_palindrome = SinglyLinkedList()
+
   for char in 'abracadabra':
     non_palindrome.append(Node(char))
-
-  odd_palindrome = SinglyLinkedList()
   for char in 'aba':
     odd_palindrome.append(Node(char))
-
-  even_palindrome = SinglyLinkedList()
   for char in 'redder':
     even_palindrome.append(Node(char))
 
   assert non_palindrome.is_palindrome(length=11) == False
   assert odd_palindrome.is_palindrome(length=3) == True
-
   assert even_palindrome.is_palindrome(length=6) == True
+
+def test_intersecting_node():
+  # Get intersecting node in O(N + M) time, O(1) space
+  list1,list2, list3 = SinglyLinkedList(), SinglyLinkedList(), SinglyLinkedList()
+  nodes = {}
+  for i in range(1, 5):
+    nodes[f'node {i}'] = Node(i)
+    list1.append(nodes[f'node {i}'])
+    if i >= 3:
+      list2.append(nodes[f'node {i}'])
+  for i in range(1, 5):
+    list3.append(Node(i))
+
+  assert list1.intersecting_node(list2) == nodes['node 3']
+  assert list1.intersecting_node(list3) == None
+
+
+
+

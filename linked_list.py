@@ -90,7 +90,6 @@ class SinglyLinkedList:
     return self.head.kth_from_end(k)
 
   def is_palindrome(self, length):
-    # pdb.set_trace()
     return self.head.is_palindromic_from_position(1, length)
 
   class NodeNotInListError(Exception):
