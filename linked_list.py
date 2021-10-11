@@ -65,6 +65,12 @@ class SinglyLinkedList:
     else:
       self.head = node
 
+  def pop(self):
+    old_head = self.head
+    self.head = self.head.next
+    old_head.next = None
+    return old_head
+
   def end_node(self):
     current = self.head
     while current.next:
