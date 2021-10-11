@@ -7,7 +7,9 @@ from .primes import primes_to_n
 from .palindrome import is_palindrome_permutation
 from .is_one_away import is_one_away
 from .matrix_rotation import rotate
-from .linked_list import Node, SinglyLinkedList
+from .linked_list import SinglyLinkedList
+from .node import Node
+from .stack import Stack
 from collections import namedtuple
 import pdb
 
