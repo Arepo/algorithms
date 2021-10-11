@@ -59,6 +59,8 @@ def test_is_rectangle():
   assert is_rectangle(point_1, point_2, point_3, point_4) == True
   assert is_rectangle(point_1, point_2, point_3, point_5) == False
 
+# Array/string algorithms
+
 def test_remove_key():
   # Modify array and return number of elements remaining in O(n) time and O(1) space, left-shifting valid values and leaving invalid ones afterwards
   arr = [1, 1, 1]
@@ -126,13 +128,16 @@ def test_matrix_rotation():
                           ['o', 'k', 'g', 'c'],
                           ['p', 'l', 'h', 'd']]
 
-# Linked list algorithms
 
+# Linked list algorithms
+class TestSinglyLinkedListFunctions:
+  def build_list_to_n(sll, n):
+    for i in range(0, n):
+      sll.append(Node(i))
 
 def test_kth_from_end():
   sll = SinglyLinkedList()
-  for i in range(0, 10):
-    sll.append(Node(i))
+  build_list_to_n(sll, 10)
   assert sll.kth_from_end(1).data == 9
   assert sll.kth_from_end(7).data == 3
 
@@ -158,16 +163,30 @@ def test_intersecting_node():
   list1,list2, list3 = SinglyLinkedList(), SinglyLinkedList(), SinglyLinkedList()
   nodes = {}
   for i in range(1, 5):
+
     nodes[f'node {i}'] = Node(i)
+
     list1.append(nodes[f'node {i}'])
-    if i >= 3:
-      list2.append(nodes[f'node {i}'])
+
   for i in range(1, 5):
     list3.append(Node(i))
+
+  list2.head = nodes['node 3']
+  list2.push(Node(0))
 
   assert list1.intersecting_node(list2) == nodes['node 3']
   assert list1.intersecting_node(list3) == None
 
+def test_start_loop():
+  # Get node at start of loop if there is one
+  looping_list, terminating_list = SinglyLinkedList(), SinglyLinkedList()
+  build_list_to_n(looping_list, 5)
+  build_list_to_n(terminating_list, 5)
+  looping_node = Node(5)
+  looping_list.append(looping_node)
+  looping_node.next = looping_list.head.next
 
+  assert looping_list.loop_node() == looping_list.head.next
+  assert terminating_list.loop_node() == None
 
 

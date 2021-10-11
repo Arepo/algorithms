@@ -59,11 +59,11 @@ class SinglyLinkedList:
     new_node.next = prev_node.next
     prev_node.next = new_node
 
-  def append(self, new_node):
+  def append(self, node):
     if self.head:
-      self.end_node().next = new_node
+      self.end_node().next = node
     else:
-      self.head = new_node
+      self.head = node
 
   def end_node(self):
     current = self.head
@@ -91,6 +91,43 @@ class SinglyLinkedList:
 
   def is_palindrome(self, length):
     return self.head.is_palindromic_from_position(1, length)
+
+  def intersecting_node(self, other):
+    if self.head == None or other.head == None:
+      return None
+
+    def count_to_intersection(list1, list2):
+      difference = abs(self_length - other_length)
+      position = 0
+      list1_node, list2_node = list1.head, list2.head
+      while position < difference:
+        # Move to same distance from end
+        list2_node = list2_node.next
+        position += 1
+      while list2_node != list1_node:
+        list1_node = list1_node.next
+        list2_node = list2_node.next
+      return list1_node
+
+    self_length, self_last = self.length_and_last_node()
+    other_length, other_last = other.length_and_last_node()
+
+    if self_last != other_last:
+      # If they ever intersect they'll become the same sub-list til the end
+      return None
+
+    if self_length <= other_length:
+      return count_to_intersection(self, other)
+    return count_to_intersection(other, self)
+
+  def length_and_last_node(self):
+    length = 1
+    node = self.head
+    while node.next:
+      length += 1
+      node = node.next
+    return (length, node)
+
 
   class NodeNotInListError(Exception):
     def __init__(self, data):
