@@ -128,6 +128,42 @@ class SinglyLinkedList:
       node = node.next
     return (length, node)
 
+  def find_loop_node(self):
+    if self.head == None:
+      return False
+
+    node1 = self.head
+    node2 = self.head.next
+
+    steps = 1
+
+    while node2 and node1 != node2:
+      node1 = self.step_n_nodes(1, node1)
+      node2 = self.step_n_nodes(2, node2)
+      steps += 1
+
+    if not node2:
+      return None
+
+    node1 = self.step_n_nodes(1)
+    node2 = self.step_n_nodes(steps + 1)
+
+    # pdb.set_trace()
+    while node1 != node2:
+      node1 = self.step_n_nodes(1, node1)
+      node2 = self.step_n_nodes(steps + 1, node2)
+
+    return node1
+
+  def step_n_nodes(self, n, node=None):
+    if node:
+      for i in range(0, n):
+        node = node.next
+    else:
+      node = self.head
+      for i in range(0, n - 1):
+        node = node.next
+    return node
 
   class NodeNotInListError(Exception):
     def __init__(self, data):

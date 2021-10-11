@@ -129,64 +129,65 @@ def test_matrix_rotation():
                           ['p', 'l', 'h', 'd']]
 
 
-# Linked list algorithms
+
 class TestSinglyLinkedListFunctions:
-  def build_list_to_n(sll, n):
+  def build_list_to_n(self, sll, n):
     for i in range(0, n):
       sll.append(Node(i))
 
-def test_kth_from_end():
-  sll = SinglyLinkedList()
-  build_list_to_n(sll, 10)
-  assert sll.kth_from_end(1).data == 9
-  assert sll.kth_from_end(7).data == 3
+  def test_kth_from_end(self):
+    sll = SinglyLinkedList()
+    self.build_list_to_n(sll, 10)
+    assert sll.kth_from_end(1).data == 9
+    assert sll.kth_from_end(7).data == 3
 
-def test_is_palindrome():
-  # Given list length
-  non_palindrome = SinglyLinkedList()
-  odd_palindrome = SinglyLinkedList()
-  even_palindrome = SinglyLinkedList()
+  def test_is_palindrome(self):
+    # Given list length
+    non_palindrome = SinglyLinkedList()
+    odd_palindrome = SinglyLinkedList()
+    even_palindrome = SinglyLinkedList()
 
-  for char in 'abracadabra':
-    non_palindrome.append(Node(char))
-  for char in 'aba':
-    odd_palindrome.append(Node(char))
-  for char in 'redder':
-    even_palindrome.append(Node(char))
+    for char in 'abracadabra':
+      non_palindrome.append(Node(char))
+    for char in 'aba':
+      odd_palindrome.append(Node(char))
+    for char in 'redder':
+      even_palindrome.append(Node(char))
 
-  assert non_palindrome.is_palindrome(length=11) == False
-  assert odd_palindrome.is_palindrome(length=3) == True
-  assert even_palindrome.is_palindrome(length=6) == True
+    assert non_palindrome.is_palindrome(length=11) == False
+    assert odd_palindrome.is_palindrome(length=3) == True
+    assert even_palindrome.is_palindrome(length=6) == True
 
-def test_intersecting_node():
-  # Get intersecting node in O(N + M) time, O(1) space
-  list1,list2, list3 = SinglyLinkedList(), SinglyLinkedList(), SinglyLinkedList()
-  nodes = {}
-  for i in range(1, 5):
+  def test_intersecting_node(self):
+    # Get intersecting node in O(N + M) time, O(1) space
+    list1,list2, list3 = SinglyLinkedList(), SinglyLinkedList(), SinglyLinkedList()
+    nodes = {}
+    for i in range(1, 5):
 
-    nodes[f'node {i}'] = Node(i)
+      nodes[f'node {i}'] = Node(i)
 
-    list1.append(nodes[f'node {i}'])
+      list1.append(nodes[f'node {i}'])
 
-  for i in range(1, 5):
-    list3.append(Node(i))
+    for i in range(1, 5):
+      list3.append(Node(i))
 
-  list2.head = nodes['node 3']
-  list2.push(Node(0))
+    list2.head = nodes['node 3']
+    list2.push(Node(0))
 
-  assert list1.intersecting_node(list2) == nodes['node 3']
-  assert list1.intersecting_node(list3) == None
+    assert list1.intersecting_node(list2) == nodes['node 3']
+    assert list1.intersecting_node(list3) == None
 
-def test_start_loop():
-  # Get node at start of loop if there is one
-  looping_list, terminating_list = SinglyLinkedList(), SinglyLinkedList()
-  build_list_to_n(looping_list, 5)
-  build_list_to_n(terminating_list, 5)
-  looping_node = Node(5)
-  looping_list.append(looping_node)
-  looping_node.next = looping_list.head.next
+  def test_find_loop_node(self):
+    # Get node at start of loop if there is one
+    looping_list, terminating_list = SinglyLinkedList(), SinglyLinkedList()
+    # pdb.set_trace()
+    self.build_list_to_n(looping_list, 5)
+    self.build_list_to_n(terminating_list, 5)
+    looping_node = Node(5)
+    looping_list.append(looping_node)
+    looping_node.next = looping_list.head.next
 
-  assert looping_list.loop_node() == looping_list.head.next
-  assert terminating_list.loop_node() == None
+    assert looping_list.find_loop_node() == looping_list.head.next
+    assert terminating_list.find_loop_node() == None
 
 
