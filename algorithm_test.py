@@ -1,3 +1,4 @@
+import pytest
 from .propagate_rightmost_set_bit import propagate_rightmost_set_bit as pr
 from .mod_power_of_two import modulo
 from .check_if_power_of_two import is_2_power
@@ -9,7 +10,7 @@ from .is_one_away import is_one_away
 from .matrix_rotation import rotate
 from .linked_list import SinglyLinkedList
 from .node import Node
-from .stack_array_manager import StackArrayManager
+from .array_stack_manager import ArrayStackManager, EmptyStackError, NoSuchStackError
 from collections import namedtuple
 import pdb
 
@@ -198,13 +199,20 @@ def test_3_stack_array():
   # Implement three stacks with a single array
   manager = ArrayStackManager()
   for i in range(0,3):
-    assert manager.is_empty(stack=i) == True
-    manager.push(stack=i, val=i * 3)
+    assert manager.is_empty(stack=i)
+    manager.push(stack=i, value=i * 3)
 
   for i in range(0,3):
     assert manager.is_empty(stack=i) == False
     assert manager.peek(stack=i) == i * 3
+    # pdb.set_trace()
     assert manager.pop(stack=i) == i * 3
 
   for i in range(0,3):
-    assert manager.is_empty(stack=i) == True
+    assert manager.is_empty(stack=i)
+
+  with pytest.raises(NoSuchStackError):
+    manager.push(stack=3, value='rabbit')
+
+  with pytest.raises(EmptyStackError):
+    manager.pop(stack=2)
