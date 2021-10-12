@@ -2,8 +2,9 @@ class Stack:
   def __init__(self):
     self.head = None
 
-  def push(self, new_node):
-    node.next = self.old_head
+  def push(self, node):
+    old_head = self.head
+    node.next = old_head
     self.head = node
 
   def pop(self):
@@ -14,7 +15,7 @@ class Stack:
     return old_head
 
   def peek(self):
-    self.head
+    return self.head
 
   def is_empty(self):
-    not not self.head
+    return not not self.head

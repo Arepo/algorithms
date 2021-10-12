@@ -9,7 +9,7 @@ from .is_one_away import is_one_away
 from .matrix_rotation import rotate
 from .linked_list import SinglyLinkedList
 from .node import Node
-from .stack import Stack
+from .stack_array_manager import StackArrayManager
 from collections import namedtuple
 import pdb
 
@@ -29,10 +29,10 @@ def test_mod_power_of_two():
 def test_is_2_power():
   # In O(1) time, using bitwise operators, equality checks, and Boolean operators
   assert is_2_power(0) == False
-  assert is_2_power(1) == True
-  assert is_2_power(2) == True
+  assert is_2_power(1)
+  assert is_2_power(2)
   assert is_2_power(3) == False
-  assert is_2_power(16) == True
+  assert is_2_power(16)
 
 def test_overlapping_rectangle():
   # Do two x-/y-axis aligned rectangles overlap? If so, return the rectangle they create
@@ -58,7 +58,7 @@ def test_is_rectangle():
   point_4 = Point(1, 7)
   point_5 = Point(1, 8)
 
-  assert is_rectangle(point_1, point_2, point_3, point_4) == True
+  assert is_rectangle(point_1, point_2, point_3, point_4)
   assert is_rectangle(point_1, point_2, point_3, point_5) == False
 
 # Array/string algorithms
@@ -100,14 +100,14 @@ def test_primes_to_n():
 
 def test_is_permutation_of_palindrome():
   palindromic, non_palindromic = 'aa bb ccc', 'aa bbb ccc'
-  assert is_palindrome_permutation(palindromic) == True
+  assert is_palindrome_permutation(palindromic)
   assert is_palindrome_permutation(non_palindromic) == False
 
 def test_is_one_away():
   # return true if StringA requires 1 or 0 edits to match StringB
-  assert is_one_away('pale', 'ple') == True
-  assert is_one_away('pales', 'pale') == True
-  assert is_one_away('pale', 'bale') == True
+  assert is_one_away('pale', 'ple')
+  assert is_one_away('pales', 'pale')
+  assert is_one_away('pale', 'bale')
   assert is_one_away('pale', 'bake') == False
 
 def test_matrix_rotation():
@@ -157,8 +157,8 @@ class TestSinglyLinkedListFunctions:
       even_palindrome.append(Node(char))
 
     assert non_palindrome.is_palindrome(length=11) == False
-    assert odd_palindrome.is_palindrome(length=3) == True
-    assert even_palindrome.is_palindrome(length=6) == True
+    assert odd_palindrome.is_palindrome(length=3)
+    assert even_palindrome.is_palindrome(length=6)
 
   def test_intersecting_node(self):
     # Get intersecting node in O(N + M) time, O(1) space
@@ -192,4 +192,19 @@ class TestSinglyLinkedListFunctions:
     assert looping_list.find_loop_node() == looping_list.head.next
     assert terminating_list.find_loop_node() == None
 
+# Stack & Queue tests
 
+def test_3_stack_array():
+  # Implement three stacks with a single array
+  manager = ArrayStackManager()
+  for i in range(0,3):
+    assert manager.is_empty(stack=i) == True
+    manager.push(stack=i, val=i * 3)
+
+  for i in range(0,3):
+    assert manager.is_empty(stack=i) == False
+    assert manager.peek(stack=i) == i * 3
+    assert manager.pop(stack=i) == i * 3
+
+  for i in range(0,3):
+    assert manager.is_empty(stack=i) == True
