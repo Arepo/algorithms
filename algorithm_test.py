@@ -11,6 +11,7 @@ from .matrix_rotation import rotate
 from .linked_list import SinglyLinkedList
 from .node import Node
 from .array_stack_manager import ArrayStackManager, EmptyStackError, NoSuchStackError
+from .stackset import Stackset
 from collections import namedtuple
 import pdb
 
@@ -196,7 +197,8 @@ class TestSinglyLinkedListFunctions:
 # Stack & Queue tests
 
 def test_3_stack_array():
-  # Implement three stacks with a single array
+  # Implement three stacks with a single 1D array
+  # TODO insertion and deletion in constant time
   manager = ArrayStackManager()
   for i in range(0,3):
     assert manager.is_empty(stack=i)
@@ -216,3 +218,23 @@ def test_3_stack_array():
 
   with pytest.raises(EmptyStackError):
     manager.pop(stack=2)
+
+def test_set_of_stacks():
+  stackset = Stackset(max_stack = 4)
+  for i in range(0,12):
+    stackset.push(Node(i))
+
+  assert stackset.pop().data == 11
+  assert stackset.pop().data == 10
+  assert stackset.peek().data == 9
+  assert stackset.pop_at(0).data == 3
+  assert stackset.pop_at(0).data == 2
+  assert stackset.pop_at(1).data == 7
+  remaining = []
+  node = stackset.head
+  while node:
+    remaining.append(node.data)
+    node = node.next
+
+  assert remaining == [9,8,6,5,4,1,0]
+

@@ -1,3 +1,5 @@
+import pdb
+
 class Node:
   def __init__(self, data):
     self.data = data
@@ -26,6 +28,8 @@ class Node:
       return self
 
     return nth_of_this
+
+
 
   def is_palindromic_from_position(self, position, length):
     if position - 0.5 == length/2:
