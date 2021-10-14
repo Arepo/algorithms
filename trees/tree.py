@@ -13,20 +13,23 @@ class BinaryTreeNode:
   def __repr__(self):
     return "Node <{}>".format(self.data)
 
-  def record_in_order_traversal(self, node, traversal_record):
-    if node:
-      node.record_in_order_traversal(node.left, traversal_record)
-      traversal_record.append(node.data)
-      node.record_in_order_traversal(node.right, traversal_record)
+  def record_in_order_traversal(self, traversal_record):
+    if self.left:
+      self.left.record_in_order_traversal(traversal_record)
+    traversal_record.append(self.data)
+    if self.right:
+      self.right.record_in_order_traversal(traversal_record)
 
-  def record_pre_order_traversal(self, node, traversal_record):
-    if node:
-      traversal_record.append(node.data)
-      node.record_pre_order_traversal(node.left, traversal_record)
-      node.record_pre_order_traversal(node.right, traversal_record)
+  def record_pre_order_traversal(self, traversal_record):
+    traversal_record.append(self.data)
+    if self.left:
+      self.left.record_pre_order_traversal(traversal_record)
+    if self.right:
+      self.right.record_pre_order_traversal(traversal_record)
 
-  def record_post_order_traversal(self, node, traversal_record):
-    if node:
-      node.record_post_order_traversal(node.left, traversal_record)
-      node.record_post_order_traversal(node.right, traversal_record)
-      traversal_record.append(node.data)
+  def record_post_order_traversal(self, traversal_record):
+    if self.left:
+      self.left.record_post_order_traversal(traversal_record)
+    if self.right:
+      self.right.record_post_order_traversal(traversal_record)
+    traversal_record.append(self.data)
