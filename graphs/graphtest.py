@@ -1,3 +1,4 @@
+from directed_graph import DGNode
 import random
 from tree import BinaryTreeNode
 import pdb
@@ -25,15 +26,16 @@ def test_traversals():
 def test_route_finder():
   origin = DGNode()
   destination = DGNode()
-
+  # pdb.set_trace()
   # Build a set of spokes, including a one-way path from origin to destination
   for i in range(0,5):
-    origin.neighbours.append(DGNode(i))
+    origin.children.append(DGNode(i))
   for i in range(5,15):
-    intermediary = random.choice(origin.neighbours)
-    intermediary.neighbours.append(DGNode)
+    intermediary = random.choice(origin.children)
+    intermediary.children.append(DGNode())
     if i == 14:
-      intermediary.neighbours[-1].append(destination)
+      # pdb.set_trace()
+      intermediary.children[-1].children.append(destination)
 
   assert origin.has_path_to(destination)
   assert destination.has_path_to(origin) == False
