@@ -33,3 +33,6 @@ class BinaryTreeNode:
     if self.right:
       self.right.record_post_order_traversal(traversal_record)
     traversal_record.append(self.data)
+
+
+

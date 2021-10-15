@@ -1,6 +1,7 @@
 from directed_graph import DGNode
 import random
 from tree import BinaryTreeNode
+from queue import Queue
 import pdb
 
 def test_traversals():
@@ -39,3 +40,23 @@ def test_route_finder():
 
   assert origin.has_path_to(destination)
   assert destination.has_path_to(origin) == False
+
+def test_link_equivalent_depths():
+  root = build_balanced_tree_of_size(31)
+
+def build_balanced_tree_of_size(n):
+  children = Queue()
+
+  for i in range(0,n):
+    children.put(BinaryTreeNode(i))
+
+  parents = Queue()
+  root = current_node = children.get()
+
+  while not children.empty():
+    current_node.left = children.get()
+    parents.put(current_node.left)
+    current_node.right = children.get()
+    parents.put(current_node.right)
+    current_node = parents.get()
+  return root
