@@ -42,7 +42,13 @@ def test_route_finder():
   assert destination.has_path_to(origin) == False
 
 def test_link_equivalent_depths():
-  root = build_balanced_tree_of_size(31)
+  # Build a linked list for each layer
+  root = build_balanced_tree_of_size(25)
+  # pdb.set_trace()
+  lists = root.linked_lists_of_sublayers()
+  assert lists[0].data.data == 0
+  assert lists[4].data.data == 15
+  assert lists[4].end_node().data.data == 24
 
 def build_balanced_tree_of_size(n):
   children = Queue()

@@ -1,6 +1,4 @@
-import pdb
-
-class Node:
+class LinkedListNode:
   def __init__(self, data):
     self.data = data
     self.next = None
@@ -29,6 +27,14 @@ class Node:
 
     return nth_of_this
 
+  def end_node(self):
+    current = self
+    while current.next:
+      current = current.next
+    return current
+
+  def append(self, node):
+    self.end_node().next = node
 
 
   def is_palindromic_from_position(self, position, length):

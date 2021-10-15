@@ -1,8 +1,8 @@
 import pdb
 
 class SinglyLinkedList:
-  def __init__(self):
-    self.head = None
+  def __init__(self, head=None):
+    self.head = head
 
   def push(self, new_node):
     new_node.next = self.head
