@@ -5,7 +5,7 @@ from queue import Queue
 import pdb
 
 def test_traversals():
-  root = BinaryTreeNode(data=0)
+  root = BinaryTreeNode(0)
   root.left = BinaryTreeNode(1)
   root.left.left = BinaryTreeNode(3)
   root.left.right = BinaryTreeNode(4)
@@ -49,6 +49,22 @@ def test_link_equivalent_depths():
   assert lists[0].data.data == 0
   assert lists[4].data.data == 15
   assert lists[4].end_node().data.data == 24
+
+def test_is_balanced_tree():
+  # balanced_root = build_balanced_tree_of_size(13)
+  # assert balanced_root.is_balanced_tree()
+
+  unroot = BinaryTreeNode('level 0')
+  unroot.left = BinaryTreeNode('level 1 leaf')
+  unroot.right = BinaryTreeNode('level 1')
+  unroot.right.left = BinaryTreeNode('level 2')
+  unroot.right.right = BinaryTreeNode('level 2')
+  unroot.right.right.right = BinaryTreeNode('level 3 leaf')
+
+  assert not unroot.is_balanced_tree()
+
+
+####
 
 def build_balanced_tree_of_size(n):
   children = Queue()
