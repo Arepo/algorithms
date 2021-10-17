@@ -75,5 +75,51 @@ class BinaryTreeNode:
 
     return linked_lists
 
+  def is_balanced_tree(self):
+    if not self.left and not self.right:
+      return [0, 0]
+    if not self.left:
+      return self.balance(self.right)
+    if not self.right:
+      return self.balance(self.left)
+
+    left_result = heights = self.left.is_balanced_tree()
+    right_result = self.right.is_balanced_tree()
+    if not left_result:
+      return left_result
+    if not right_result:
+      return right_result
+
+    heights.extend(right_result)
+    shortest = min(heights)
+    tallest = max(heights)
+    if tallest - shortest <= 1:
+      return [shortest + 1, tallest + 1]
+
+    return FalseTree()
+
+  def balance(self, child):
+    balance = child.is_balanced_tree()
+    balance[0] += 1
+    balance[1] += 1
+    return balance
+
+class FalseTree:
+  def extend(self, other):
+    return self
+
+  def __bool__(self):
+    return False
+
+  def __gt__(self, other):
+    return True
+
+  def __lt__(self, other):
+    return True
+
+  def __getitem__(self, index):
+    return 0
+
+
 
 
