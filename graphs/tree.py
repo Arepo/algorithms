@@ -79,9 +79,9 @@ class BinaryTreeNode:
     if not self.left and not self.right:
       return [0, 0]
     if not self.left:
-      return self.balance(self.right)
+      return self.__balance(self.right)
     if not self.right:
-      return self.balance(self.left)
+      return self.__balance(self.left)
 
     left_result = heights = self.left.is_balanced_tree()
     right_result = self.right.is_balanced_tree()
@@ -96,15 +96,58 @@ class BinaryTreeNode:
     if tallest - shortest <= 1:
       return [shortest + 1, tallest + 1]
 
-    return FalseTree()
+    return Unbalanced()
 
-  def balance(self, child):
+  def is_search_tree(self, side=None):
+    # TODO may need edge case for when root has 0-1 children
+    if not side and self.left.is_search_tree(side='l') < self.data and self.data < self.right.is_search_tree(side='r'):
+      # No side means it's the root node of the traversal
+      return True
+    if not side:
+      return False
+
+    # Leaf node
+    if not self.left and not self.right:
+      return self.data
+
+    # Not root node or leaf node
+    if self.left:
+      left_value = self.left.is_search_tree(side='l')
+    if self.right:
+      right_value = self.right.is_search_tree(side='r')
+
+    # Having right child only
+    if not self.left and self.data > right_value:
+      return NonSearchy()
+    if not self.left and side == 'l':
+      # Parents of left children care about the child subtree's max value
+      return right_value
+    if not self.left and side == 'r':
+      # Parents of right children care about the child subtree's min value
+      return self.data
+
+    # Having left child only
+    if not self.right and left_value > self.data:
+      return NonSearchy()
+    if not self.right and side == 'l':
+      return self.data
+    if not self.right and side == 'r':
+      return left_value
+
+    # Having two children
+    if not left_value < self.data or not self.data < right_value:
+      return NonSearchy()
+    if side == 'l':
+      return right_value
+    return left_value
+
+  def __balance(self, child):
     balance = child.is_balanced_tree()
     balance[0] += 1
     balance[1] += 1
     return balance
 
-class FalseTree:
+class Unbalanced:
   def extend(self, other):
     return self
 
@@ -120,6 +163,12 @@ class FalseTree:
   def __getitem__(self, index):
     return 0
 
+class NonSearchy:
+  def __lt__(self, other):
+    return False
 
+  def __gt__(self, other):
+    return False
 
-
+  def __bool__(self, other):
+    return False
