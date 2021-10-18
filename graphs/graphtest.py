@@ -51,6 +51,7 @@ def test_link_equivalent_depths():
   assert lists[4].end_node().data.data == 24
 
 def test_is_balanced_tree():
+  # Check if binary tree is balanced without using a tree wrapper class or top-level functions
   balanced_root = build_balanced_tree_of_size(13)
   assert balanced_root.is_balanced_tree()
 
@@ -64,6 +65,7 @@ def test_is_balanced_tree():
   assert not unroot.is_balanced_tree()
 
 def test_is_search_tree():
+  # Check if binary tree is a search tree without using a tree wrapper class or top-level functions
   non_search_root = build_balanced_tree_of_size(20)
   assert not non_search_root.is_search_tree()
 

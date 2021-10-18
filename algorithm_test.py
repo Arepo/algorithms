@@ -15,6 +15,8 @@ from .stackset import Stackset
 from collections import namedtuple
 import pdb
 
+# Aiming for all algorithms to operate in Pareto optimal Big O time and space unless otherwise specified
+
 def test_propagate_rightmost_set_bit():
   # In O(1) time, using bitwise operators, equality checks, and Boolean operators
   bit_word = int('01010000', 2)
