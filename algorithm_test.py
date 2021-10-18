@@ -9,7 +9,7 @@ from .palindrome import is_palindrome_permutation
 from .is_one_away import is_one_away
 from .matrix_rotation import rotate
 from .linked_list import SinglyLinkedList
-from .node import Node
+from .linked_list_node import LinkedListNode
 from .array_stack_manager import ArrayStackManager, EmptyStackError, NoSuchStackError
 from .stackset import Stackset
 from collections import namedtuple
@@ -137,7 +137,7 @@ def test_matrix_rotation():
 class TestSinglyLinkedListFunctions:
   def build_list_to_n(self, sll, n):
     for i in range(0, n):
-      sll.append(Node(i))
+      sll.append(LinkedListNode(i))
 
   def test_kth_from_end(self):
     sll = SinglyLinkedList()
@@ -152,11 +152,11 @@ class TestSinglyLinkedListFunctions:
     even_palindrome = SinglyLinkedList()
 
     for char in 'abracadabra':
-      non_palindrome.append(Node(char))
+      non_palindrome.append(LinkedListNode(char))
     for char in 'aba':
-      odd_palindrome.append(Node(char))
+      odd_palindrome.append(LinkedListNode(char))
     for char in 'redder':
-      even_palindrome.append(Node(char))
+      even_palindrome.append(LinkedListNode(char))
 
     assert non_palindrome.is_palindrome(length=11) == False
     assert odd_palindrome.is_palindrome(length=3)
@@ -168,15 +168,15 @@ class TestSinglyLinkedListFunctions:
     nodes = {}
     for i in range(1, 5):
 
-      nodes[f'node {i}'] = Node(i)
+      nodes[f'node {i}'] = LinkedListNode(i)
 
       list1.append(nodes[f'node {i}'])
 
     for i in range(1, 5):
-      list3.append(Node(i))
+      list3.append(LinkedListNode(i))
 
     list2.head = nodes['node 3']
-    list2.push(Node(0))
+    list2.push(LinkedListNode(0))
 
     assert list1.intersecting_node(list2) == nodes['node 3']
     assert list1.intersecting_node(list3) == None
@@ -187,7 +187,7 @@ class TestSinglyLinkedListFunctions:
     # pdb.set_trace()
     self.build_list_to_n(looping_list, 5)
     self.build_list_to_n(terminating_list, 5)
-    looping_node = Node(5)
+    looping_node = LinkedListNode(5)
     looping_list.append(looping_node)
     looping_node.next = looping_list.head.next
 
@@ -222,7 +222,7 @@ def test_3_stack_array():
 def test_set_of_stacks():
   stackset = Stackset(max_stack = 4)
   for i in range(0,12):
-    stackset.push(Node(i))
+    stackset.push(LinkedListNode(i))
 
   assert stackset.pop().data == 11
   assert stackset.pop().data == 10

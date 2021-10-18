@@ -16,7 +16,7 @@ class LinkedListNode:
       return 1
 
     nth_or_target = self.next.kth_from_end(k)
-    if isinstance(nth_or_target, Node):
+    if isinstance(nth_or_target, LinkedListNode):
       # Just pass the node up once we've found it
       return nth_or_target
 

@@ -1,7 +1,7 @@
 from directed_graph import DGNode
 import random
 from tree import BinaryTreeNode
-from queue import Queue
+from collections import deque
 import pdb
 
 def test_traversals():
@@ -63,24 +63,37 @@ def test_is_balanced_tree():
 
   assert not unroot.is_balanced_tree()
 
+def test_is_search_tree():
+  non_search_root = build_balanced_tree_of_size(20)
+  assert not non_search_root.is_search_tree()
 
+  search_root = BinaryTreeNode(4)
+  search_root.left = BinaryTreeNode(2)
+  search_root.left.left = BinaryTreeNode(0)
+  search_root.left.left.right = BinaryTreeNode(1)
+  search_root.left.right = BinaryTreeNode(3)
+  search_root.right = BinaryTreeNode(6)
+  search_root.right.left = BinaryTreeNode(5)
+  assert search_root.is_search_tree()
 
 
 ####
 
 def build_balanced_tree_of_size(n):
-  children = Queue()
+  children = deque()
 
   for i in range(0,n):
-    children.put(BinaryTreeNode(i))
+    children.appendleft(BinaryTreeNode(i))
 
-  parents = Queue()
-  root = current_node = children.get()
+  parents = deque()
+  root = current_node = children.pop()
 
-  while not children.empty():
-    current_node.left = children.get()
-    parents.put(current_node.left)
-    current_node.right = children.get()
-    parents.put(current_node.right)
-    current_node = parents.get()
+  while children:
+    current_node.left = children.pop()
+    parents.appendleft(current_node.left)
+    if not children:
+      break
+    current_node.right = children.pop()
+    parents.appendleft(current_node.right)
+    current_node = parents.pop()
   return root
