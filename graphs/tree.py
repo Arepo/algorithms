@@ -10,6 +10,11 @@ from linked_list_node import LinkedListNode
 from collections import deque
 import pdb
 
+class TreeUtils():
+  def is_subtree(self, t1, t2):
+    pass
+
+
 class BinaryTreeNode:
   def __init__(self, data):
     self.data = data

@@ -1,6 +1,6 @@
 from directed_graph import DGNode
 import random
-from tree import BinaryTreeNode
+from tree import BinaryTreeNode, TreeUtils
 from collections import deque
 import pdb
 
@@ -78,6 +78,20 @@ def test_is_search_tree():
   search_root.right.left = BinaryTreeNode(5)
   assert search_root.is_search_tree()
 
+def test_is_subtree():
+  t1 = build_balanced_tree_of_size(17)
+  t2 = build_balanced_tree_of_size(17)
+
+  t1.right.right.right.right = (BinaryTreeNode(18))
+  t3 = build_balanced_tree_of_size(13)
+  connector = BinaryTreeNode(-1)
+  connector.left = t1
+  connector.right = t3
+  t3 = connector
+
+  utils = TreeUtils()
+  assert not utils.is_subtree(t3, t2)
+  assert utils.is_subtree(t1, t2)
 
 ####
 
