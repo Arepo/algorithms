@@ -78,20 +78,38 @@ def test_is_search_tree():
   search_root.right.left = BinaryTreeNode(5)
   assert search_root.is_search_tree()
 
-def test_is_subtree():
-  t1 = build_balanced_tree_of_size(17)
-  t2 = build_balanced_tree_of_size(17)
+def test_is_subtree_via_recursion():
+  minimal_left_tree = build_balanced_tree_of_size(3)
+  extended_left_tree = build_balanced_tree_of_size(3)
+  extended_left_tree.left.left = (BinaryTreeNode(18))
 
-  t1.right.right.right.right = (BinaryTreeNode(18))
-  t3 = build_balanced_tree_of_size(13)
-  connector = BinaryTreeNode(-1)
-  connector.left = t1
-  connector.right = t3
-  t3 = connector
+  right_tree = build_balanced_tree_of_size(2)
+  supertree = BinaryTreeNode(-1)
+  supertree.left = extended_left_tree
+  supertree.right = right_tree
 
   utils = TreeUtils()
-  assert not utils.is_subtree(t3, t2)
-  assert utils.is_subtree(t1, t2)
+  assert not utils.is_subtree_via_recursion(right_tree, minimal_left_tree)
+  assert not utils.is_subtree_via_recursion(minimal_left_tree, extended_left_tree)
+  assert utils.is_subtree_via_recursion(supertree, minimal_left_tree)
+
+
+
+
+
+  # t1 = build_balanced_tree_of_size(17)
+  # t2 = build_balanced_tree_of_size(17)
+
+  # t1.right.right.right.right = (BinaryTreeNode(18))
+  # t3 = build_balanced_tree_of_size(13)
+  # connector = BinaryTreeNode(-1)
+  # connector.left = t1
+  # connector.right = t3
+  # t3 = connector
+
+  # utils = TreeUtils()
+  # assert not utils.is_subtree(t3, t2)
+  # assert utils.is_subtree(t1, t2)
 
 ####
 

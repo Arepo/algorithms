@@ -11,8 +11,26 @@ from collections import deque
 import pdb
 
 class TreeUtils():
-  def is_subtree(self, t1, t2):
-    pass
+  def is_subtree_via_recursion(self, supertree_root, subtree_root):
+    if not subtree_root:
+      return True
+
+    if not supertree_root:
+      return False
+
+    if (
+      supertree_root.data == subtree_root.data                and
+      self.is_subtree_via_recursion(supertree_root.left, subtree_root.left) and
+      self.is_subtree_via_recursion(supertree_root.right, subtree_root.right)
+    ):
+      return True
+    # pdb.set_trace()
+    return self.is_subtree_via_recursion(supertree_root.left, subtree_root) or self.is_subtree_via_recursion(supertree_root.right, subtree_root)
+
+  # def is_subtree_via_list(self, supertree_root, subtree_root)
+
+
+
 
 
 class BinaryTreeNode:
