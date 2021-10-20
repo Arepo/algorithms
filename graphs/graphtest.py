@@ -92,7 +92,7 @@ def test_is_subtree():
 
 def test_random_node_in_binary_search_tree():
   utils = TreeUtils()
-  root = utils.build_binary_search_tree(range(1, 4))
+  root = utils.build_binary_search_tree(range(1, 19))
   assert root.random_subnode().data in range(1,19)
 
 

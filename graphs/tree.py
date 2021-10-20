@@ -75,15 +75,16 @@ class BinaryTreeNode:
   def __repr__(self):
     return "Node <{}>".format(self.data)
 
-  def random_subnode(self):
-    number = random.randint(1, self.subtree_size)
+  def random_subnode(self, number=None):
+    if not number:
+      number = random.randint(1, self.subtree_size)
     left_subtree_size = self.left.subtree_size if self.left else 0
 
     if number <= left_subtree_size:
-      return self.left.random_subnode()
+      return self.left.random_subnode(number)
     if number == self.subtree_size:
       return self
-    return self.right.random_subnode()
+    return self.right.random_subnode(number - left_subtree_size - 1)
 
   def record_in_order_traversal(self, traversal_record):
     if self.left:
