@@ -1,7 +1,7 @@
 import os
 import sys
 import inspect
-import pdb
+import random
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
@@ -11,7 +11,10 @@ from collections import deque
 import pdb
 
 class TreeUtils():
-  def is_subtree_via_recursion(self, supertree_root, subtree_root):
+  def __init__(self):
+    self.root = None
+
+  def is_subtree(self, supertree_root, subtree_root):
     if not subtree_root:
       return True
 
@@ -20,16 +23,41 @@ class TreeUtils():
 
     if (
       supertree_root.data == subtree_root.data                and
-      self.is_subtree_via_recursion(supertree_root.left, subtree_root.left) and
-      self.is_subtree_via_recursion(supertree_root.right, subtree_root.right)
+      self.is_subtree(supertree_root.left, subtree_root.left) and
+      self.is_subtree(supertree_root.right, subtree_root.right)
     ):
       return True
-    # pdb.set_trace()
-    return self.is_subtree_via_recursion(supertree_root.left, subtree_root) or self.is_subtree_via_recursion(supertree_root.right, subtree_root)
 
-  # def is_subtree_via_list(self, supertree_root, subtree_root)
+    return self.is_subtree(supertree_root.left, subtree_root) or self.is_subtree(supertree_root.right, subtree_root)
 
+  def build_binary_search_tree(self, defined_range):
+    values = list(defined_range)
+    random.shuffle(values)
+    for value in values:
+      self.insert(value)
+    return self.root
 
+  def insert(self, value):
+    current = self.root
+    if not current:
+      self.root = BinaryTreeNode(value)
+      return
+
+    while current:
+      current.subtree_size += 1
+      parent = current
+      if value < current.data:
+        current = current.left
+      elif value > current.data:
+        current = current.right
+      else:
+        raise Exception("We're not prepared for this sort of anarchy")
+
+    node = BinaryTreeNode(value)
+    if value < parent.data:
+      parent.left = node
+    else:
+      parent.right = node
 
 
 
@@ -39,12 +67,23 @@ class BinaryTreeNode:
     self.left = None
     self.right = None
     self.layer = None
+    self.subtree_size = 1
 
   def __str__(self):
     return "Node <{}>".format(self.data)
 
   def __repr__(self):
     return "Node <{}>".format(self.data)
+
+  def random_subnode(self):
+    number = random.randint(1, self.subtree_size)
+    left_subtree_size = self.left.subtree_size if self.left else 0
+
+    if number <= left_subtree_size:
+      return self.left.random_subnode()
+    if number == self.subtree_size:
+      return self
+    return self.right.random_subnode()
 
   def record_in_order_traversal(self, traversal_record):
     if self.left:

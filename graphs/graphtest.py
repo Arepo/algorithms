@@ -1,7 +1,7 @@
 from directed_graph import DGNode
 import random
 from tree import BinaryTreeNode, TreeUtils
-from collections import deque
+from collections import deque, Counter
 import pdb
 
 def test_traversals():
@@ -27,7 +27,6 @@ def test_traversals():
 def test_route_finder():
   origin = DGNode()
   destination = DGNode()
-  # pdb.set_trace()
   # Build a set of spokes, including a one-way path from origin to destination
   for i in range(0,5):
     origin.children.append(DGNode(i))
@@ -35,7 +34,6 @@ def test_route_finder():
     intermediary = random.choice(origin.children)
     intermediary.children.append(DGNode())
     if i == 14:
-      # pdb.set_trace()
       intermediary.children[-1].children.append(destination)
 
   assert origin.has_path_to(destination)
@@ -44,7 +42,6 @@ def test_route_finder():
 def test_link_equivalent_depths():
   # Build a linked list for each layer
   root = build_balanced_tree_of_size(25)
-  # pdb.set_trace()
   lists = root.linked_lists_of_sublayers()
   assert lists[0].data.data == 0
   assert lists[4].data.data == 15
@@ -78,7 +75,7 @@ def test_is_search_tree():
   search_root.right.left = BinaryTreeNode(5)
   assert search_root.is_search_tree()
 
-def test_is_subtree_via_recursion():
+def test_is_subtree():
   minimal_left_tree = build_balanced_tree_of_size(3)
   extended_left_tree = build_balanced_tree_of_size(3)
   extended_left_tree.left.left = (BinaryTreeNode(18))
@@ -89,27 +86,15 @@ def test_is_subtree_via_recursion():
   supertree.right = right_tree
 
   utils = TreeUtils()
-  assert not utils.is_subtree_via_recursion(right_tree, minimal_left_tree)
-  assert not utils.is_subtree_via_recursion(minimal_left_tree, extended_left_tree)
-  assert utils.is_subtree_via_recursion(supertree, minimal_left_tree)
+  assert not utils.is_subtree(right_tree, minimal_left_tree)
+  assert not utils.is_subtree(minimal_left_tree, extended_left_tree)
+  assert utils.is_subtree(supertree, minimal_left_tree)
 
+def test_random_node_in_binary_search_tree():
+  utils = TreeUtils()
+  root = utils.build_binary_search_tree(range(1, 4))
+  assert root.random_subnode().data in range(1,19)
 
-
-
-
-  # t1 = build_balanced_tree_of_size(17)
-  # t2 = build_balanced_tree_of_size(17)
-
-  # t1.right.right.right.right = (BinaryTreeNode(18))
-  # t3 = build_balanced_tree_of_size(13)
-  # connector = BinaryTreeNode(-1)
-  # connector.left = t1
-  # connector.right = t3
-  # t3 = connector
-
-  # utils = TreeUtils()
-  # assert not utils.is_subtree(t3, t2)
-  # assert utils.is_subtree(t1, t2)
 
 ####
 
