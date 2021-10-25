@@ -25,5 +25,39 @@ def binary_representation(num):
 
   return ''.join(bitstring)
 
+def max_1s(num):
+  bitstring = f"{num:b}"
+  str_start_index = 0
+  substring_index = 0
+  max_length = 0
+  zero_index = 0
+
+  while str_start_index < len(bitstring):
+
+    if (
+      substring_index >= len(bitstring) or
+      bitstring[str_start_index] == '1' and bitstring[substring_index] == '0' and zero_index != str_start_index
+    ):
+      # Substring has either run off the end or reached second 0
+      length = substring_index - str_start_index
+      max_length = max(max_length, length)
+      str_start_index = substring_index = zero_index + 1
+      zero_index = str_start_index
+
+    elif bitstring[str_start_index] == '1' and bitstring[substring_index] == '1':
+      substring_index += 1
+
+    elif bitstring[str_start_index] == '1':
+      # Bit is the first 0 we've encountered
+      zero_index = substring_index
+      substring_index += 1
+
+    else:
+      # Str start is a 0
+      str_start_index = substring_index = zero_index + 1
+      zero_index = str_start_index
+
+
+  return max_length
 
 
