@@ -95,7 +95,6 @@ def test_random_node_in_binary_search_tree():
   root = utils.build_binary_search_tree(range(1, 19))
   assert root.random_subnode().data in range(1,19)
 
-
 ####
 
 def build_balanced_tree_of_size(n):
