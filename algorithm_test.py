@@ -186,7 +186,6 @@ class TestSinglyLinkedListFunctions:
   def test_find_loop_node(self):
     # Get node at start of loop if there is one
     looping_list, terminating_list = SinglyLinkedList(), SinglyLinkedList()
-    # pdb.set_trace()
     self.build_list_to_n(looping_list, 5)
     self.build_list_to_n(terminating_list, 5)
     looping_node = LinkedListNode(5)
@@ -209,7 +208,6 @@ def test_3_stack_array():
   for i in range(0,3):
     assert manager.is_empty(stack=i) == False
     assert manager.peek(stack=i) == i * 3
-    # pdb.set_trace()
     assert manager.pop(stack=i) == i * 3
 
   for i in range(0,3):

@@ -101,7 +101,6 @@ class SinglyLinkedList:
     node1 = self.step_n_nodes(1)
     node2 = self.step_n_nodes(steps + 1)
 
-    # pdb.set_trace()
     while node1 != node2:
       node1 = self.step_n_nodes(1, node1)
       node2 = self.step_n_nodes(steps + 1, node2)
