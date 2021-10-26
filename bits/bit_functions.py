@@ -60,5 +60,11 @@ def max_1s(num):
 
   return max_length
 
-
+def count_bit_transitions(num1, num2):
+  exclusive_bits = num1 ^ num2
+  transitions = 0
+  while exclusive_bits != 0:
+    transitions += 1
+    exclusive_bits = exclusive_bits & (exclusive_bits - 1)
+  return transitions
 
