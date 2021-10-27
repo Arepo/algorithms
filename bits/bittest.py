@@ -19,13 +19,18 @@ def test_count_bit_transitions():
   assert count_bit_transitions(35, 24) == 5
 
 def test_draw_line():
-  # Set all bits in a line represented by a bitarray, representing a monochrome screen
-  display = [
-    0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0
+  # Set all bits inclusively in a line represented by a bitarray, representing a monochrome screen
+  screen = [
+    0,0,0,0,0,0,
+    0,0,0,0,0,0,
+    0,0,0,0,0,0
   ]
-  draw_line(display, screen_width=8, x1=19, x2=53, y=1)
-  draw_line(display, screen_width=8, x1=5, x2=40, y=2)
-  assert display == [
-    False
+  draw_line(screen, screen_width=6, x1=19, x2=37, y=2)
+  draw_line(screen, screen_width=6, x1=25, x2=30, y=1)
+  draw_line(screen, screen_width=6, x1=5, x2=27, y=0)
+
+  assert screen == [
+    0, 0, 31, 255, 248, 0,
+    0, 0, 0, 126, 0, 0,
+    7, 255, 255, 224, 0, 0
   ]

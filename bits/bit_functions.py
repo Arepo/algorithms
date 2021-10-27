@@ -68,3 +68,24 @@ def count_bit_transitions(num1, num2):
     exclusive_bits = exclusive_bits & (exclusive_bits - 1)
   return transitions
 
+def draw_line(screen, screen_width, x1, x2, y):
+  first_byte_index = _bytes_index(screen, screen_width, x1, y)
+  last_byte_index = _bytes_index(screen, screen_width, x2, y)
+
+  if first_byte_index != last_byte_index:
+    screen[first_byte_index] = screen[first_byte_index] | 255 & ~(255 << 8 - _byte_index(x1))
+
+    for byte in range(first_byte_index + 1, last_byte_index):
+      screen[byte] = 255
+
+    screen[last_byte_index] = screen[last_byte_index] | 255 & (255 << 8 - _byte_index(x2))
+  else:
+    screen[first_byte_index] = (255 >> (_byte_index(x1) + 7 - _byte_index(x2))) << 7 - _byte_index(x2)
+
+def _bytes_index(screen, width, x, y):
+  height = int(len(screen) / width - 1)
+  return int(x / 8) + width * (height - y)
+
+def _byte_index(x):
+  return x % 8
+
