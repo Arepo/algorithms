@@ -25,6 +25,7 @@ def test_draw_line():
     0,0,0,0,0,0,
     0,0,0,0,0,0
   ]
+
   draw_line(screen, screen_width=6, x1=19, x2=37, y=2)
   draw_line(screen, screen_width=6, x1=25, x2=30, y=1)
   draw_line(screen, screen_width=6, x1=5, x2=27, y=0)
