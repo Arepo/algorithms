@@ -19,3 +19,36 @@ def iterative_step_count(n):
     b = c
     c = d
   return a + b + c
+
+def subsets(superset):
+  def subsets(superset, memo):
+    if superset in memo:
+      return
+
+    memo.add(frozenset(superset))
+    for ele in superset:
+      subsets(superset - {ele}, memo)
+
+  memo = set()
+  subsets(superset, memo)
+  return memo
+
+def multiply(x,y):
+  def multiply(x,y,log2_of_y):
+    if y < 1:
+      return 0
+    if y == 1:
+      return x
+    if x == 1:
+      return y
+    if log2_of_y:
+      return x << log2_of_y
+
+    highest_included_power_of_2 = 0
+    while y >> highest_included_power_of_2 + 1:
+      highest_included_power_of_2 += 1
+    remaining_multiple = y - (1 << highest_included_power_of_2)
+
+    return multiply(x, y, highest_included_power_of_2) + multiply(x, remaining_multiple, 0)
+
+  return multiply(x,y,0)

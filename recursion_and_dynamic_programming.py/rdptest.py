@@ -1,4 +1,4 @@
-from rdp import recursive_step_count, iterative_step_count, subsets
+from rdp import recursive_step_count, iterative_step_count, subsets, multiply
 import timeit
 import pdb
 
@@ -17,38 +17,45 @@ def test_recursive_step_count():
 
 def test_subsets():
   # return all subsets of a set
-  assert subsets({1}) == {set(), {1}}
+  assert subsets({1}) == {frozenset(), frozenset({1})}
   assert subsets({1,2,3,4,5}) == {
-    set(),
-    {1},
-    {2},
-    {3},
-    {4},
-    {5},
-    {1,2},
-    {1,3},
-    {1,4},
-    {1,5},
-    {2,3},
-    {2,4},
-    {2,5},
-    {3,4},
-    {3,5},
-    {4,5},
-    {1,2,3},
-    {1,2,4},
-    {1,2,5},
-    {1,3,4},
-    {1,3,5},
-    {1,4,5},
-    {2,3,4},
-    {2,3,5},
-    {2,4,5},
-    {3,4,5},
-    {1,2,3,4},
-    {1,2,3,5},
-    {1,2,4,5},
-    {1,3,4,5},
-    {2,3,4,5},
-    {1,2,3,4,5}
+    frozenset(),
+    frozenset({1}),
+    frozenset({2}),
+    frozenset({3}),
+    frozenset({4}),
+    frozenset({5}),
+    frozenset({1,2}),
+    frozenset({1,3}),
+    frozenset({1,4}),
+    frozenset({1,5}),
+    frozenset({2,3}),
+    frozenset({2,4}),
+    frozenset({2,5}),
+    frozenset({3,4}),
+    frozenset({3,5}),
+    frozenset({4,5}),
+    frozenset({1,2,3}),
+    frozenset({1,2,4}),
+    frozenset({1,2,5}),
+    frozenset({1,3,4}),
+    frozenset({1,3,5}),
+    frozenset({1,4,5}),
+    frozenset({2,3,4}),
+    frozenset({2,3,5}),
+    frozenset({2,4,5}),
+    frozenset({3,4,5}),
+    frozenset({1,2,3,4}),
+    frozenset({1,2,3,5}),
+    frozenset({1,2,4,5}),
+    frozenset({1,3,4,5}),
+    frozenset({2,3,4,5}),
+    frozenset({1,2,3,4,5})
   }
+
+def test_recursive_multiplication():
+  # Create a recursive multiplication function taking two positive integers without using '*' operator
+  assert multiply(1,10) == 10
+  assert multiply(7,6) == 42
+  assert multiply(6,7) == 42
+  assert multiply(3,5) == 15
