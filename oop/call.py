@@ -4,7 +4,7 @@ from employee import Employee
 import random
 import pdb
 
-# Run this file to execute the script. You might have to run it a few times to get good service.
+# Run this file to execute a call to the centre. You might have to run it a few times to get good service.
 respondent_count = random.randint(0,3)
 manager_count = random.randint(0,2)
 director_count = random.randint(0,1)
