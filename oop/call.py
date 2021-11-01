@@ -4,7 +4,10 @@ from employee import Employee
 import random
 import pdb
 
+# Simulate a call centre using singleton object pattern (not my choice!)
+
 # Run this file to execute a call to the centre. You might have to run it a few times to get good service.
+
 respondent_count = random.randint(0,3)
 manager_count = random.randint(0,2)
 director_count = random.randint(0,1)

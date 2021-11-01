@@ -1,4 +1,4 @@
-from rdp import recursive_step_count, iterative_step_count, subsets, multiply
+from rdp import recursive_step_count, iterative_step_count, subsets, multiply, permutations
 import timeit
 import pdb
 
@@ -59,3 +59,34 @@ def test_recursive_multiplication():
   assert multiply(7,6) == 42
   assert multiply(6,7) == 42
   assert multiply(3,5) == 15
+
+def string_permutations():
+  # Compute all permutations of a string of unique characters
+  assert permutations('abcd') = {
+    'abcd',
+    'abdc',
+    'acbd',
+    'acdb',
+    'adbc',
+    'adcb',
+    'bacd',
+    'badc',
+    'cabd',
+    'cadb',
+    'dabc',
+    'dacb',
+    'bcad',
+    'bdac',
+    'cbad',
+    'cdab',
+    'dbac',
+    'dcab',
+    'bcda',
+    'bdca',
+    'cbda',
+    'cdba',
+    'dbca',
+    'dcba',
+  }
+
+  assert len(permutations('abcdef')) == 720
