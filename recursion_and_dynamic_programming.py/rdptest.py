@@ -60,33 +60,15 @@ def test_recursive_multiplication():
   assert multiply(6,7) == 42
   assert multiply(3,5) == 15
 
-def string_permutations():
+def test_string_permutations():
   # Compute all permutations of a string of unique characters
-  assert permutations('abcd') = {
-    'abcd',
-    'abdc',
-    'acbd',
-    'acdb',
-    'adbc',
-    'adcb',
-    'bacd',
-    'badc',
-    'cabd',
-    'cadb',
-    'dabc',
-    'dacb',
-    'bcad',
-    'bdac',
-    'cbad',
-    'cdab',
-    'dbac',
-    'dcab',
-    'bcda',
-    'bdca',
-    'cbda',
-    'cdba',
-    'dbca',
-    'dcba',
+  assert permutations('abc') == {
+    'abc',
+    'acb',
+    'bac',
+    'bca',
+    'cab',
+    'cba',
   }
 
   assert len(permutations('abcdef')) == 720

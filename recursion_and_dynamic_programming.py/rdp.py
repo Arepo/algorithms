@@ -52,3 +52,21 @@ def multiply(x,y):
     return multiply(x, y, highest_included_power_of_2) + multiply(x, remaining_multiple, 0)
 
   return multiply(x,y,0)
+
+def permutations(string: str) -> set:
+  def get_substring_permutations(string: str) -> set:
+    substring_permutations = set()
+
+    if len(string) == 1:
+      substring_permutations.add(string)
+      return substring_permutations
+
+    for substring in get_substring_permutations(string[1:]):
+      for i in range(len(substring) + 1):
+        substring_permutations.add(substring[:i] + string[0] + substring[i:])
+    return substring_permutations
+
+  return get_substring_permutations(string)
+
+
+
