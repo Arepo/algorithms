@@ -1,4 +1,4 @@
-from rdp import recursive_step_count, iterative_step_count, subsets, multiply, permutations
+from rdp import recursive_step_count, iterative_step_count, subsets, multiply, unique_permutations, valid_parentheses
 import timeit
 import pdb
 
@@ -60,9 +60,9 @@ def test_recursive_multiplication():
   assert multiply(6,7) == 42
   assert multiply(3,5) == 15
 
-def test_string_permutations():
+def test_unique_string_permutations():
   # Compute all permutations of a string of unique characters
-  assert permutations('abc') == {
+  assert unique_permutations('abc') == {
     'abc',
     'acb',
     'bac',
@@ -71,4 +71,11 @@ def test_string_permutations():
     'cba',
   }
 
-  assert len(permutations('abcdef')) == 720
+  assert len(unique_permutations('abcdef')) == 720 # ie n!
+
+def test_valid_parentheses():
+  # Return all valid pairings of N parentheses
+  assert valid_parentheses(1) == {'()'}
+  assert valid_parentheses(2) == {'()()', '(())'}
+  assert valid_parentheses(3) == {'()()()','((()))','(())()','()(())','(()())'}
+

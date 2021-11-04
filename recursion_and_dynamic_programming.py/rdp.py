@@ -53,20 +53,25 @@ def multiply(x,y):
 
   return multiply(x,y,0)
 
-def permutations(string: str) -> set:
-  def get_substring_permutations(string: str) -> set:
-    substring_permutations = set()
+def unique_permutations(string: str) -> set:
+  substring_permutations = set()
 
-    if len(string) == 1:
-      substring_permutations.add(string)
-      return substring_permutations
-
-    for substring in get_substring_permutations(string[1:]):
-      for i in range(len(substring) + 1):
-        substring_permutations.add(substring[:i] + string[0] + substring[i:])
+  if len(string) == 1:
+    substring_permutations.add(string)
     return substring_permutations
 
-  return get_substring_permutations(string)
+  for substring in unique_permutations(string[1:]):
+    for i in range(len(substring) + 1):
+      substring_permutations.add(substring[:i] + string[0] + substring[i:])
+  return substring_permutations
 
-
-
+def valid_parentheses(n):
+  if n == 1:
+    return {'()'}
+  parenthesis_sequences = set()
+  for parentheses_string in valid_parentheses(n-1):
+    for i in range(len(parentheses_string) + 1):
+      with_opened = parentheses_string[:i] + '(' + parentheses_string[i:]
+      for j in range(i + 1, len(parentheses_string) + 2):
+        parenthesis_sequences.add(with_opened[:j] + ')' + with_opened[j:])
+  return parenthesis_sequences
