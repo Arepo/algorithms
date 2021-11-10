@@ -1,4 +1,4 @@
-from rdp import recursive_step_count, iterative_step_count, subsets, multiply, unique_permutations, valid_parentheses
+from rdp import recursive_step_count, iterative_step_count, subsets, multiply, unique_permutations, nested_arrays, flexi_arrays, number_distribution #, valid_parentheses
 import timeit
 import pdb
 
@@ -73,9 +73,27 @@ def test_unique_string_permutations():
 
   assert len(unique_permutations('abcdef')) == 720 # ie n!
 
-def test_valid_parentheses():
-  # Return all valid pairings of N parentheses
-  assert valid_parentheses(1) == {'()'}
-  assert valid_parentheses(2) == {'()()', '(())'}
-  assert valid_parentheses(3) == {'()()()','((()))','(())()','()(())','(()())'}
+# No big-O-optimisation attempted in this section
+
+def test_number_distribution():
+  # For a whole number num and a length length, return all the valid ways of partitioning the number into t whole numbers
+  assert number_distribution(num=0, length=2) == [[0,0]]
+  assert number_distribution(num=1, length=3) == [[0, 0, 1], [1, 0, 0], [0, 1, 0]]
+
+def test_nested_arrays():
+  # Return all lists of length 3 that contain 0s or list, such that n is the number of bracket pairs in each top-level-list
+  assert nested_arrays(2) == [ [0,0,[0,0,0]], [0,[0,0,0],0], [[0,0,0],0,0] ]
+
+def test_flexible_length_arrays():
+  # Return a top level array of `size` elements and `num` bracket pairs
+  assert flexi_arrays(number=1, size=1) == [[0]]
+  assert flexi_arrays(number=2, size=3) == [ [0,0,[0,0,0]], [0,[0,0,0],0], [[0,0,0],0,0] ]
+  assert flexi_arrays(number=2, size=2) == [[0,[0,0,0]], [[0,0,0],0]]
+
+# def test_valid_parentheses():
+#   # Return all valid pairings of N parentheses
+#   assert valid_parentheses(1) == {'()'}
+#   assert valid_parentheses(2) == {'()()', '(())'}
+#   assert valid_parentheses(3) == {'()()()','((()))','(())()','()(())','(()())'}
+#   pdb.set_trace()
 
