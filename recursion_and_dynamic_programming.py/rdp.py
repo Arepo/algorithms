@@ -101,37 +101,32 @@ def number_distribution(num, length):
     )
   return distributions
 
-
-def flexi_arrays(number,size):
+def flexi_arrays(number,length):
   if number == 0:
     return [0]
-  if number == 1 and size == 0:
+  if number == 1 and length == 0:
     return [[]]
-  if size == 0:
+  if length == 0:
     return []
 
   results = []
   for eye in range(1, number + 1):
-    for prefix in flexi_arrays(eye, size - 1):
+    for prefix in flexi_arrays(eye, length - 1):
       for suffix in flexi_arrays(number - eye, 3):
         results.append(prefix + [suffix])
   return results
 
+def valid_parentheses(magnitude):
+  if magnitude == 0:
+    return ['']
 
-# def valid_parentheses(n):
-#   if n == 1:
-#     return {'()'}
-#   parenthesis_sequences = set()
-#   for parentheses_string in valid_parentheses(n-1):
-#     for i in range(len(parentheses_string) + 1):
-#       with_opened = parentheses_string[:i] + '(' + parentheses_string[i:]
-#       for j in range(i + 1, len(parentheses_string) + 2):
-#         parenthesis_sequences.add(with_opened[:j] + ')' + with_opened[j:])
-#   return parenthesis_sequences
-
-# def valid_parentheses(n, strings={}, left=False, right=False):
-#   string = '(' * n + ')' * n
-#   return valid_parentheses(n-1, string, True) + valid_parentheses(n-1, other_string, right=True)
+  results = []
+  for eye in range(magnitude):
+    for prefix in valid_parentheses(eye):
+      for suffix in valid_parentheses(magnitude - eye - 1):
+        for enclosed_suffix in ['(' + suffix + ')' ]:
+          results.append(prefix + enclosed_suffix)
+  return results
 
 
 

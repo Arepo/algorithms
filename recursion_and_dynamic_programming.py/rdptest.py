@@ -1,4 +1,4 @@
-from rdp import recursive_step_count, iterative_step_count, subsets, multiply, unique_permutations, nested_arrays, flexi_arrays, number_distribution #, valid_parentheses
+from rdp import recursive_step_count, iterative_step_count, subsets, multiply, unique_permutations, nested_arrays, flexi_arrays, number_distribution, valid_parentheses
 import timeit
 import pdb
 
@@ -86,14 +86,16 @@ def test_nested_arrays():
 
 def test_flexible_length_arrays():
   # Return a top level array of `size` elements and `num` bracket pairs
-  assert flexi_arrays(number=1, size=1) == [[0]]
-  assert flexi_arrays(number=2, size=3) == [ [0,0,[0,0,0]], [0,[0,0,0],0], [[0,0,0],0,0] ]
-  assert flexi_arrays(number=2, size=2) == [[0,[0,0,0]], [[0,0,0],0]]
+  assert flexi_arrays(number=1, length=1) == [[0]]
+  assert flexi_arrays(number=2, length=3) == [ [0,0,[0,0,0]], [0,[0,0,0],0], [[0,0,0],0,0] ]
+  assert flexi_arrays(number=2, length=2) == [[0,[0,0,0]], [[0,0,0],0]]
 
-# def test_valid_parentheses():
-#   # Return all valid pairings of N parentheses
-#   assert valid_parentheses(1) == {'()'}
-#   assert valid_parentheses(2) == {'()()', '(())'}
-#   assert valid_parentheses(3) == {'()()()','((()))','(())()','()(())','(()())'}
-#   pdb.set_trace()
+def test_valid_parentheses():
+  # Return all valid pairings of N parentheses
+  # pdb.set_trace()
+  assert valid_parentheses(1) == ['()']
+  assert valid_parentheses(2) == ['(())', '()()']
+  assert valid_parentheses(3) == ['((()))', '(()())', '()(())', '(())()', '()()()']
+  for_6 = valid_parentheses(6)
+  assert len(set(for_6)) == len(for_6) # Confirm no duplicates in longer list
 
