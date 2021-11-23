@@ -13,7 +13,7 @@ class MyQueue:
     return old_head
 
   def is_empty(self):
-    return not not self.head
+    return bool(self.head)
 
   def peek(self):
     return self.head

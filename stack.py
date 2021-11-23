@@ -18,4 +18,4 @@ class Stack:
     return self.head
 
   def is_empty(self):
-    return not not self.head
+    return bool(self.head)
